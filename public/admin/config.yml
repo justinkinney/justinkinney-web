@@ -1,0 +1,57 @@
+# Decap CMS configuration.
+#
+# Local editing:
+#   npx decap-server
+#   npm run dev
+#   open http://localhost:4321/admin/
+#
+# Production editing uses the GitHub backend plus an external OAuth provider.
+# The OAuth provider must serve /auth and /callback for this GitHub OAuth app.
+backend:
+  name: github
+  repo: justinkinney/justinkinney-web
+  branch: main
+  base_url: https://decap-oauth.justinkinney.com
+  auth_endpoint: auth
+  site_domain: justinkinney.com
+
+local_backend:
+  url: http://localhost:8082/api/v1
+
+publish_mode: editorial_workflow
+media_folder: public/media
+public_folder: /media
+
+collections:
+  - name: articles
+    label: Articles
+    label_singular: Article
+    folder: src/content/articles
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    preview_path: articles/{{slug}}
+    summary: "{{title}} — {{pubDate}}"
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Publish Date
+        name: pubDate
+        widget: datetime
+        format: YYYY-MM-DD
+        date_format: YYYY-MM-DD
+        time_format: false
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+      - label: Body
+        name: body
+        widget: markdown
