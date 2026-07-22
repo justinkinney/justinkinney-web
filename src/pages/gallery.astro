@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="photos | justin kinney"
+  description="A static photo gallery powered by an S3-generated index."
+  active="photos"
+>
+  <main>
+    <section class="section gallery-page-hero">
+      <div class="container">
+        <p class="section-label">// photo gallery</p>
+        <div class="gallery-page-heading">
+          <div>
+            <h1>Photos</h1>
+            <p class="hero-description">
+              Pictures and field notes, served from a static gallery index.
+            </p>
+          </div>
+          <div class="terminal-card gallery-terminal">
+            <p>&gt; cat gallery.config</p>
+            <dl>
+              <div><dt>source:</dt><dd>S3</dd></div>
+              <div><dt>index:</dt><dd>gallery-data.js</dd></div>
+              <div><dt>runtime:</dt><dd>static html</dd></div>
+            </dl>
+            <p>&gt; <span class="cursor">_</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-border" id="photos">
+      <div class="container">
+        <div class="section-heading-row gallery-toolbar">
+          <div>
+            <p class="section-label">// latest uploads</p>
+            <h2 class="section-title">Browse the gallery</h2>
+          </div>
+          <div class="gallery-controls">
+            <label for="gallery-sort">Sort by date</label>
+            <select id="gallery-sort" data-gallery-sort>
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+            <div class="gallery-meta">
+              <span data-gallery-count>0 photos</span>
+              <span data-gallery-status>Loading gallery index…</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="gallery-grid" data-gallery-grid aria-live="polite">
+          <li class="gallery-empty card">Loading photos…</li>
+        </ul>
+
+        <p class="gallery-note">
+          This gallery is powered by a static <code>gallery-data.js</code> file generated from S3.
+          No server is required after the index is published.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline src="/gallery-data.js"></script>
+  <script is:inline src="/gallery.js"></script>
+</BaseLayout>

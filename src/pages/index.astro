@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const articles = (await getCollection('articles', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout active="home">
+  <main class="blog-home">
+    <section class="section intro-section" id="home">
+      <div class="container intro-grid">
+        <div>
+          <p class="section-label">// personal notes</p>
+          <h1>Justin Kinney</h1>
+          <p class="intro-copy">
+            Writing about systems, the outdoors, cars, bikes, tools, and whatever else seems worth keeping around.
+          </p>
+        </div>
+
+        <div class="card intro-card">
+          <p>&gt; currently</p>
+          <p>Seattle, WA. Considering my next move. Posting notes and photos here as I go.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-border" id="articles">
+      <div class="container article-index">
+        <div class="section-heading-row">
+          <div>
+            <p class="section-label">// articles</p>
+            <h2 class="section-title">Index</h2>
+          </div>
+          <a class="text-link" href="/gallery/">Photos →</a>
+        </div>
+
+        <ol class="article-list">
+          {articles.map((article) => (
+            <li class="article-row card">
+              <a href={`/articles/${article.id}/`}>
+                <time datetime={article.data.pubDate.toISOString()}>
+                  {article.data.pubDate.toISOString().slice(0, 10)}
+                </time>
+                <span>{article.data.title}</span>
+                {article.data.description && <p>{article.data.description}</p>}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
