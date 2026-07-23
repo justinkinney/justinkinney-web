@@ -11,7 +11,7 @@ backend:
   name: github
   repo: justinkinney/justinkinney-web
   branch: main
-  base_url: https://decap-oauth.justinkinney.com
+  base_url: https://oauth.justinkinney.com
   auth_endpoint: auth
   site_domain: justinkinney.com
 
