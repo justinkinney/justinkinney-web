@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/generate-gallery-index.mjs --bucket ${S3_BUCKET} --prefix ${S3_GALLERY_PREFIX} --base-url ${S3_GALLERY_BASEURL} --out public/gallery-data.js",
     "build": "astro build",
     "preview": "astro preview",
     "cms": "PORT=8082 npx decap-server"
