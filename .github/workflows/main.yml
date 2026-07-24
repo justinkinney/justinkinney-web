@@ -29,9 +29,6 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Rewrite registry address
-        run: sed -i '' 's|https://artifacthub-phx.oci.oraclecorp.com/api|https://registry.npmjs.org|g' package-lock.json
-
       - name: Install dependencies
         run: npm ci
         
