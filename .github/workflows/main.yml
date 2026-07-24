@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - main
-
-environment: justinkinney-web
-
+      
 jobs:
   sync-to-s3:
-    
+    environment: justinkinney-web
     runs-on: ubuntu-latest
     
     permissions:
