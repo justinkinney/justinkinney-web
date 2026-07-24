@@ -7,3 +7,5 @@ draft: false
 [View the photos →](/gallery/)
 
 Mid-July 2026, I went with a few friends on an "adventure" style backpacking trip. This trip presented some of the the most difficult physical and mental challenges I've ever faced.
+
+Additional details to follow!
