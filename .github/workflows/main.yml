@@ -8,6 +8,10 @@ on:
 jobs:
   sync-to-s3:
     environment: justinkinney-web
+    env:
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      S3_GALLERY_PREFIX: ${{ secrets.S3_GALLERY_PREFIX }}
+      S3_GALLERY_BASEURL: ${{ secrets.S3_GALLERY_BASEURL }}
     runs-on: ubuntu-latest
     
     permissions:
@@ -34,10 +38,7 @@ jobs:
         
       - name: Build site
         run: npm run build
-
-      - name: Rebuild gallery data
-        run: node scripts/generate-gallery-index.mjs --bucket ${{ secrets.S3_BUCKET }} --prefix ${{ secrets.S3_GALLERY_PREFIX }} --base-url ${{ secrets.S3_GALLERY_BASEURL }} --out public/gallery-data.js
-
+      
       - name: Sync to S3
         run: |
           aws s3 sync dist/ s3://${{ secrets.S3_BUCKET }} \
